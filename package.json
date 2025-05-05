@@ -1,5 +1,5 @@
 {
-  "name": "mayanswift_example",
+  "name": "demo-bouldertech",
   "version": "1.0.0",
   "license": "Apache-2.0",
   "scripts": {
@@ -12,7 +12,7 @@
     "@wormhole-foundation/sdk-connect": "1.15.1",
     "@wormhole-foundation/sdk-evm": "1.15.1",
     "@wormhole-foundation/sdk-solana": "1.15.1",
-    "dotenv": "16.5.0"
+    "dotenv": "16.5.0",
     "ethers": "^6.0.0"
   },
   "devDependencies": {

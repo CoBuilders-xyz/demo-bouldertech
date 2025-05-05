@@ -1,62 +1,70 @@
-# Mayan Swift Demo 
+# BoulderTech Demo
 
-This guide explains how to integrate the Wormhole Mayan Swift Route from the Wormhole SDK into your application. This Route abstracts the complexity of cross-chain token swaps, handling route discovery, fee estimation, and transaction construction.
+This demo showcases two different flows for simulating a purchase and sale of a Token 3643 using Wormhole-Mayan Swift for cross-chain transfers:
+
+1. Purchase Flow: User buys Token 3643 with stablecoins in another chain
+2. Sell Flow: User sells Token 3643 and receives stablecoins in another chain
 
 > [!IMPORTANT]
-> Mayan Swap only works on **mainnet**. Testing on testnet environments will fail.
+> This demo only works on **mainnet**. Testing on testnet environments will fail.
 
-## Prerequisites
+## Setup
 
-Ensure you have the following installed:
-
-- [Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) installed on your machine
-- A wallet with a private key, funded with native tokens on mainnet for gas fees
-
-## Setup and Usage
-
-Follow these steps to clone the repository, set up environment variables, and perform token transfers.
-
-**1. Clone the Repository**
-
-```bash
-git clone https://github.com/wormhole-foundation/demo-mayanswift.git
-cd demo-mayanswift
-```
-
-**2. Install Dependencies**
+1. Install dependencies:
 
 ```bash
 npm install
 ```
 
-**3. Set Up Environment Variables**
+2. Create a `.env` file with the following private keys:
 
-Create a `.env` file in the root directory and add your private keys:
+```env
+# User accounts
+USER_PRIVATE_KEY=your_private_key_here
 
-```bash
-ETH_PRIVATE_KEY="INSERT_PRIVATE_KEY"
-SOL_PRIVATE_KEY="INSERT_PRIVATE_KEY"
+# Vault account
+VAULT_PRIVATE_KEY=your_private_key_here
+
+# Worker accounts
+WORKER_PRIVATE_KEY=your_private_key_here
 ```
 
-- **ETH_PRIVATE_KEY** - private key for an Ethereum-compatible wallet
-- **SOL_PRIVATE_KEY** - private key for a Solana wallet
+## Usage
 
-## Mayan Swift Swap
+### Purchase Flow
 
-To initiate a token transfer across chains, using the Mayan Swift Route run:
+To demonstrate the purchase flow (User (Polygon) -> Vault (Optimism)):
 
 ```bash
-npm run swap
+npm run purchaseFlow
 ```
 
-## Configuration
+This will:
 
-You can customize the following options within the scripts:
+1. User sends USDC from Polygon to Optimism
+2. BoulderTech Vault receives the funds on Optimism
+3. Token 3643 is purchased (simulated)
+4. Shows balance changes for both user and vault
 
-- **Source and Destination Chains** - modify `sendChain` and `destChain` in `swap.ts`
-- **Amount and Transfer Settings** - adjust `amount` to suit your needs
+### Sell Flow
 
-## Troubleshooting
+To demonstrate the sell flow (Vault (Optimism) -> User (Base)):
 
-- **Missing environment variables** - ensure `.env` is correctly set up and keys are valid
-- **Unsupported platform error** - verify that the chains are compatible and supported by the Wormhole SDK
+```bash
+npm run sellFlow
+```
+
+This will:
+
+1. Token 3643 is sold (simulated)
+2. Vault sends USDT from Optimism to Base
+3. User receives the funds on Base
+4. Shows balance changes for both vault and user
+
+## Notes
+
+- Make sure all accounts have sufficient funds for gas fees
+- The demo uses USDC/USDT as the tokens for transfers
+- All transfers use Mayan Swift for cross-chain functionality
+- The demo includes detailed console logs to track the progress of each step
+- Balance changes are displayed with proper decimal formatting
