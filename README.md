@@ -8,6 +8,11 @@ This demo showcases two different flows for simulating a purchase and sale of a 
 > [!IMPORTANT]
 > This demo only works on **mainnet**. Testing on testnet environments will fail.
 
+## Demo
+https://github.com/user-attachments/assets/8ba0a478-94e8-40e7-98b6-0c41fd7c86ae
+
+
+
 ## Setup
 
 1. Install dependencies:
