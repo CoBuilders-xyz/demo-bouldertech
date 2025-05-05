@@ -1,14 +1,10 @@
-import {
-  Wormhole,
-  routes,
-} from "@wormhole-foundation/sdk-connect";
+import { Wormhole, routes } from "@wormhole-foundation/sdk-connect";
 import { EvmPlatform } from "@wormhole-foundation/sdk-evm";
 import { SolanaPlatform } from "@wormhole-foundation/sdk-solana";
-import {
-  MayanRouteSWIFT,
-} from '@mayanfinance/wormhole-sdk-route';
+import { MayanRouteSWIFT } from "@mayanfinance/wormhole-sdk-route";
 import dotenv from "dotenv";
 import { getSigner } from "./helpers";
+import { ACCOUNTS } from "./config";
 
 // Initialize dotenv
 dotenv.config();
@@ -17,12 +13,18 @@ dotenv.config();
   // Setup
   const wh = new Wormhole("Mainnet", [EvmPlatform, SolanaPlatform]);
 
-  const sendChain = wh.getChain("Base");
-  const destChain = wh.getChain("Solana");
+  const sendChain = wh.getChain("Polygon");
+  const destChain = wh.getChain("Optimism");
 
   // Doing transaction of native ETH on Ethereum to native SOL on Solana
-  const source = Wormhole.tokenId(sendChain.chain, "native");
-  const destination = Wormhole.tokenId(destChain.chain, "native");
+  const source = Wormhole.tokenId(
+    sendChain.chain,
+    "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359"
+  );
+  const destination = Wormhole.tokenId(
+    destChain.chain,
+    "0x94b008aA00579c1307B0EF2c499aD98a8ce58e58" // USDT
+  );
 
   // Create a new Wormhole route resolver, adding the Mayan route to the default list
   // @ts-ignore
@@ -37,8 +39,8 @@ dotenv.config();
   console.log(dstTokens.slice(0, 5));
 
   // Pull private keys from env for testing purposes
-  const sender = await getSigner(sendChain);
-  const receiver = await getSigner(destChain);
+  const sender = await getSigner(sendChain, ACCOUNTS.USER.Polygon);
+  const receiver = await getSigner(destChain, ACCOUNTS.USER.Optimism);
 
   // Creating a transfer request fetches token details
   // since all routes will need to know about the tokens
@@ -53,7 +55,7 @@ dotenv.config();
 
   // Specify the amount as a decimal string
   const transferParams = {
-    amount: "0.0001",
+    amount: "3",
     options: bestRoute.getDefaultOptions(),
   };
 
