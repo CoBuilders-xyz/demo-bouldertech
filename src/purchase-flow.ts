@@ -38,7 +38,6 @@ async function purchaseToken3643() {
 
   // Get signers
   const userSigner = await getSigner(sourceChain, ACCOUNTS.USER.Polygon);
-  const workerSigner = await getSigner(destChain, ACCOUNTS.WORKER.Optimism);
   const vaultSigner = await getSigner(destChain, ACCOUNTS.VAULT.Optimism);
 
   // Get balances before
@@ -52,7 +51,6 @@ async function purchaseToken3643() {
   );
 
   console.log("👤 User Address:", userSigner.address);
-  console.log("👷 Worker Address:", workerSigner.address);
   console.log("🏦 Vault Address:", vaultSigner.address);
   console.log("----------------------------------------");
 
@@ -108,12 +106,12 @@ async function purchaseToken3643() {
   );
   console.log("📝 Transfer initiated with receipt:", receipt);
   console.log("----------------------------------------");
-  // Worker completes the transfer on destination chain
-  console.log("⏳ Worker completing transfer on Optimism...");
+  // Vault completes the transfer on destination chain
+  console.log("⏳ Vault completing transfer on Optimism...");
   await routes.checkAndCompleteTransfer(
     bestRoute,
     receipt,
-    workerSigner.signer,
+    vaultSigner.signer,
     15 * 60 * 1000
   );
 

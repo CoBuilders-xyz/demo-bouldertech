@@ -24,9 +24,6 @@ USER_PRIVATE_KEY=your_private_key_here
 
 # Vault account
 VAULT_PRIVATE_KEY=your_private_key_here
-
-# Worker accounts
-WORKER_PRIVATE_KEY=your_private_key_here
 ```
 
 ## Usage

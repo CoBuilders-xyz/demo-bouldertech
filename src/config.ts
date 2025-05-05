@@ -34,11 +34,6 @@ export const ACCOUNTS = {
     Optimism: process.env.VAULT_PRIVATE_KEY || "",
     Base: process.env.VAULT_PRIVATE_KEY || "",
   },
-  WORKER: {
-    Arbitrum: process.env.WORKER_PRIVATE_KEY || "",
-    Optimism: process.env.WORKER_PRIVATE_KEY || "",
-    Base: process.env.WORKER_PRIVATE_KEY || "",
-  },
 };
 
 // Token ID for our demo token

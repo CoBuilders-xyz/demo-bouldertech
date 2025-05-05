@@ -36,7 +36,6 @@ async function sellToken3643(outputToken: TokenType = "USDC") {
 
   // Get signers
   const vaultSigner = await getSigner(sourceChain, ACCOUNTS.VAULT.Optimism);
-  const workerSigner = await getSigner(destChain, ACCOUNTS.WORKER.Base);
   const userSigner = await getSigner(destChain, ACCOUNTS.USER.Base);
 
   // Get balances before
@@ -50,7 +49,6 @@ async function sellToken3643(outputToken: TokenType = "USDC") {
   );
 
   console.log("🏦 Vault Address:", vaultSigner.address);
-  console.log("👷 Worker Address:", workerSigner.address);
   console.log("👤 User Address:", userSigner.address);
 
   // Create transfer request
@@ -106,12 +104,12 @@ async function sellToken3643(outputToken: TokenType = "USDC") {
   console.log("📝 Transfer initiated with receipt:", receipt);
   console.log("----------------------------------------");
 
-  // Worker completes the transfer on destination chain
-  console.log("⏳ Worker completing transfer on Base...");
+  // User completes the transfer on destination chain
+  console.log("⏳ User completing transfer on Base...");
   await routes.checkAndCompleteTransfer(
     bestRoute,
     receipt,
-    workerSigner.signer,
+    userSigner.signer,
     15 * 60 * 1000
   );
 
