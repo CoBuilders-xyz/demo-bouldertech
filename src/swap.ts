@@ -55,7 +55,7 @@ dotenv.config();
 
   // Specify the amount as a decimal string
   const transferParams = {
-    amount: "3",
+    amount: "1",
     options: bestRoute.getDefaultOptions(),
   };
 
